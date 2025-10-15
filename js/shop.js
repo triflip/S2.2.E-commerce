@@ -112,8 +112,13 @@ const buttons = document.querySelectorAll(".add-to-cart");
     }
 
 // Exercise 2
-const cleanCart = () =>  {
-}
+const cleanCart = () =>  { 
+    cart.length =0;     
+    console.log("Empty cart");        
+    console.log(cart); 
+}  
+    const cleanCartButtom = document.getElementById("clean-cart"); 
+    cleanCartButtom.addEventListener("click", cleanCart );
 
 // Exercise 3
 const calculateTotal = () =>  {
