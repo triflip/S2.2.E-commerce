@@ -75,14 +75,44 @@ const cart = [];
 const total = 0;
 
 // Exercise 1
+// 1. Loop for to the array products to get the item to add to cart
+// 2. Add found product to the cart array
 const buy = (id) => {
-    // 1. Loop for to the array products to get the item to add to cart
-    // 2. Add found product to the cart array
-}
+    // cerquem el producte
+    for(const product of products) {
+        if(product.id === id) {
+
+            // coomprovem si ja hi és a cart
+            let found = false;
+            for(const item of cart) {
+                if(item.id === id) {
+                item.quantity++;
+                found = true;
+                break;
+                }
+            }
+
+          // si no hi és, l'afegim ara amb l'atribut quantity:1
+          if(!found) {
+            const productToAdd =  {...product, quantity: 1}
+            cart.push(productToAdd);
+            }
+            console.log(`${product.name} add to cart!`);
+            console.log(cart);    
+        }
+    }
+};
+
+const buttons = document.querySelectorAll(".add-to-cart");
+    for(const button of buttons) {
+        button.addEventListener("click", ()=> { 
+            const productId = Number(button.dataset.productId);// agafem id del producte del data attribute
+            buy(productId);
+        });   
+    }
 
 // Exercise 2
 const cleanCart = () =>  {
-
 }
 
 // Exercise 3
