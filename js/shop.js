@@ -101,7 +101,8 @@ const buy = (id) => {
             console.log(cart);     
             applyPromotionsCart();
             console.log(calculateTotal());
-                    
+             
+            printCart();
             }
     }
 };
@@ -156,10 +157,46 @@ const applyPromotionsCart = () =>  {
     }
 };
 
-// Exercise 5
+
 const printCart = () => {
-    // Fill the shopping cart mot dom
+    // que i on modifiquem del Dom
+    const cartListBody = document.getElementById("cart_list");
+    const totalPriceEl = document.getElementById("total_price");
+    const countProductEl = document.getElementById("count_product");
+
+   // buidem per evutar duplicar files
+   cartListBody.innerHTML = "";
+
+   let totalArticles = 0;
+
+   for(const item of cart) {
+    // creem una fila per cada item
+    const tr = document.createElement("tr");
+    // afegim les cel·les al HTML i amb td : omplim columnes
+    tr.innerHTML = `
+    <th scope = "row">${item.name}</th>
+    <td>$${item.price.toFixed(2)}</td>
+    <td>${item.quantity}</td>
+    <td>$${item.subtotalWithDiscount ? item.subtotalWithDiscount.toFixed(2) : (item.price * item.quantity).toFixed(2)} </td>
+    `;
+    // afegim la fila al tbody dinàmicament
+    cartListBody.appendChild(tr);
+
+    totalArticles += item.quantity;
 }
+    // mostrem el total articles
+    countProductEl.textContent = totalArticles;
+    // actualitzem total del carret
+    totalPriceEl.textContent = calculateTotal().toFixed(2);
+}
+
+    // seleccionem el modal
+    const cartModal = document.getElementById("cartModal");
+    // cada vegada que s'obre el modal, cridem printCart()
+    cartModal.addEventListener("show.bs.modal", () => {
+        printCart();
+    });
+
 
 
 // ** Nivell II **
