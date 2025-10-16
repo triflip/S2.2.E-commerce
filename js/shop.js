@@ -102,6 +102,7 @@ const buy = (id) => {
             applyPromotionsCart();
             console.log(calculateTotal());
              
+           
             printCart();
             }
     }
@@ -118,6 +119,7 @@ const buttons = document.querySelectorAll(".add-to-cart");
 // Exercise 2
 const cleanCart = () =>  { 
     cart.length =0;     
+    printCart();
     console.log("Empty cart");        
     console.log(cart); 
 }  
