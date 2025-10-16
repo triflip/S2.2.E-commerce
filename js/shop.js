@@ -98,8 +98,10 @@ const buy = (id) => {
                 cart.push(productToAdd);
             }
             console.log(`${product.name} add to cart!`);
-            console.log(cart);    
-            calculateTotal();
+            console.log(cart);     
+            applyPromotionsCart();
+            console.log(calculateTotal());
+                    
             }
     }
 };
@@ -121,26 +123,42 @@ const cleanCart = () =>  {
     const cleanCartButtom = document.getElementById("clean-cart"); 
     cleanCartButtom.addEventListener("click", cleanCart );
 
-    
+
 const calculateTotal = () =>  {
     let totalPrice = 0;
    
-    for(const items of cart) {
-        totalPrice += items.price * items.quantity;
-        console.log(`Total: ${totalPrice}`);
+    for(const item of cart) {
+        if(item.subtotalWithDiscount) {
+            totalPrice += item.subtotalWithDiscount;
+        } else { 
+        totalPrice += item.price * item.quantity;
+        }
     }
-    
-   
+    return totalPrice;
 }
 
 
 const applyPromotionsCart = () =>  {
-   
-}
+   for(const item of cart) {
+        if(item.offer && item.quantity >= item.offer.number) {
+
+        // per no tornarr a  aplicar desc sobre desc
+        if(!item.originalPrice) item.originalPrice = item.price;
+        //ara apliquem desc sobre el preu origirinal
+        const discountedPrice = item.originalPrice * (1 - item.offer.percent /100); 
+       
+        // total amb disc
+        item.subtotalWithDiscount = discountedPrice * item.quantity;
+        }else {
+            // si no hi ha disc, el total és normal
+            item.subtotalWithDiscount = item.price * item.quantity
+        }
+    }
+};
 
 // Exercise 5
 const printCart = () => {
-    // Fill the shopping cart modal manipulating the shopping cart dom
+    // Fill the shopping cart mot dom
 }
 
 

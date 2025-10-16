@@ -9,7 +9,7 @@ const validate = () => {
 	// Get the error elements
 	const errorName = document.getElementById("errorName");
 	const errorEmail = document.getElementById("errorEmail");  
-	
+			
 	// Validate fields entered by the user: name, phone, password, and email
 	if(fName.value.trim() == ""){
 		error++;
