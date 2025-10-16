@@ -92,14 +92,15 @@ const buy = (id) => {
                 }
             }
 
-          // si no hi és, l'afegim ara amb l'atribut quantity:1
-          if(!found) {
-            const productToAdd =  {...product, quantity: 1}
-            cart.push(productToAdd);
+            // si no hi és, l'afegim ara amb l'atribut quantity:1
+            if(!found) {
+                const productToAdd =  {...product, quantity: 1}
+                cart.push(productToAdd);
             }
             console.log(`${product.name} add to cart!`);
             console.log(cart);    
-        }
+            calculateTotal();
+            }
     }
 };
 
@@ -120,14 +121,21 @@ const cleanCart = () =>  {
     const cleanCartButtom = document.getElementById("clean-cart"); 
     cleanCartButtom.addEventListener("click", cleanCart );
 
-// Exercise 3
+    
 const calculateTotal = () =>  {
-    // Calculate total price of the cart using the "cartList" array
+    let totalPrice = 0;
+   
+    for(const items of cart) {
+        totalPrice += items.price * items.quantity;
+        console.log(`Total: ${totalPrice}`);
+    }
+    
+   
 }
 
-// Exercise 4
+
 const applyPromotionsCart = () =>  {
-    // Apply promotions to each item in the array "cart"
+   
 }
 
 // Exercise 5
