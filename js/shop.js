@@ -180,6 +180,9 @@ const printCart = () => {
     <td>$${item.price.toFixed(2)}</td>
     <td>${item.quantity}</td>
     <td>$${item.subtotalWithDiscount ? item.subtotalWithDiscount.toFixed(2) : (item.price * item.quantity).toFixed(2)} </td>
+    <td>
+    <button onclick="removeFromCart(${item.id})">–</button>
+  </td>
     `;
     // afegim la fila al tbody dinàmicament
     cartListBody.appendChild(tr);
@@ -204,9 +207,29 @@ const printCart = () => {
 // ** Nivell II **
 
 // Exercise 7
-const removeFromCart = (id) => {
+function removeFromCart(id) {
+  // Buscar el producte al carret
+  const productInCart = cart.find(item => item.id === id);
 
+  if (productInCart) {
+    if (productInCart.quantity > 1) {
+      // Si té més d'una unitat, restem una
+      productInCart.quantity--;
+    } else {
+      // Si només en té una, l'eliminem del carret
+      const index = cart.findIndex(item => item.id === id);
+      cart.splice(index, 1);
+    }
+
+    // Actualitzar promocions
+    applyPromotionsCart(cart);
+
+    // Tornar a pintar el carret
+    printCart();
+  }
 }
+window.removeFromCart = removeFromCart;
+
 
 const open_modal = () =>  {
     printCart();
