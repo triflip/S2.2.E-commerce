@@ -2,7 +2,6 @@ import { products } from './products.js';
 
 const cart = [];
 
-const total = 0;
 
 // Exercise 1
 // 1. Loop for to the array products to get the item to add to cart
