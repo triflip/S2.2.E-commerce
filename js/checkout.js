@@ -1,7 +1,7 @@
-// Exercise 6
+
 const validate = () => {
   let error = 0;
-  // Get the input fields
+  
   const fName = document.getElementById("fName");
   const fLastN = document.getElementById("fLastN");
   const fEmail = document.getElementById("fEmail");
@@ -9,7 +9,7 @@ const validate = () => {
   const fAddress = document.getElementById("fAddress");
   const fPhone = document.getElementById("fPhone");
 
-  // Get the error elements
+
   const errorName = document.getElementById("errorName");
   const errorLastN = document.getElementById("errorLastN");
   const errorEmail = document.getElementById("errorEmail");
@@ -17,7 +17,7 @@ const validate = () => {
   const errorAddress = document.getElementById("errorAddress");
   const errorPhone = document.getElementById("errorPhone");
 
-  // Validate fields entered by the user: name, phone, password, and email
+ 
   if (
     fName.value.trim() == "" ||
     fName.value.trim().length < 3 ||

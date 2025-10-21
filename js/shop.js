@@ -2,16 +2,12 @@ import { products } from './products.js';
 
 const cart = [];
 
-
-// Exercise 1
-// 1. Loop for to the array products to get the item to add to cart
-// 2. Add found product to the cart array
 const buy = (id) => {
-    // cerquem el producte
+    
     for(const product of products) {
         if(product.id === id) {
 
-            // coomprovem si ja hi és a cart
+
             let found = false;
             for(const item of cart) {
                 if(item.id === id) {
@@ -21,7 +17,7 @@ const buy = (id) => {
                 }
             }
 
-            // si no hi és, l'afegim ara amb l'atribut quantity:1
+          
             if(!found) {
                 const productToAdd =  {...product, quantity: 1}
                 cart.push(productToAdd);
@@ -40,7 +36,7 @@ const buy = (id) => {
 const buttons = document.querySelectorAll(".add-to-cart");
     for(const button of buttons) {
         button.addEventListener("click", ()=> { 
-            const productId = Number(button.dataset.productId);// agafem id del producte del data attribute
+            const productId = Number(button.dataset.productId);
             buy(productId);
         });   
     }
@@ -74,15 +70,15 @@ const applyPromotionsCart = () =>  {
    for(const item of cart) {
         if(item.offer && item.quantity >= item.offer.number) {
 
-        // per no tornarr a  aplicar desc sobre desc
+        
         if(!item.originalPrice) item.originalPrice = item.price;
-        //ara apliquem desc sobre el preu origirinal
+        
         const discountedPrice = item.originalPrice * (1 - item.offer.percent /100); 
        
-        // total amb disc
+       
         item.subtotalWithDiscount = discountedPrice * item.quantity;
         }else {
-            // si no hi ha disc, el total és normal
+        
             item.subtotalWithDiscount = item.price * item.quantity
         }
     }
@@ -90,20 +86,20 @@ const applyPromotionsCart = () =>  {
 
 
 const printCart = () => {
-    // que i on modifiquem del Dom
+   
     const cartListBody = document.getElementById("cart_list");
     const totalPriceEl = document.getElementById("total_price");
     const countProductEl = document.getElementById("count_product");
 
-   // buidem per evutar duplicar files
+   
    cartListBody.innerHTML = "";
 
    let totalArticles = 0;
 
    for(const item of cart) {
-    // creem una fila per cada item
+    
     const tr = document.createElement("tr");
-    // afegim les cel·les al HTML i amb td : omplim columnes
+   
     tr.innerHTML = `
     <th scope = "row">${item.name}</th>
     <td>$${item.price.toFixed(2)}</td>
@@ -113,20 +109,19 @@ const printCart = () => {
     <button onclick="removeFromCart(${item.id})">–</button>
   </td>
     `;
-    // afegim la fila al tbody dinàmicament
+
     cartListBody.appendChild(tr);
 
     totalArticles += item.quantity;
-}
-    // mostrem el total articles
+}s
     countProductEl.textContent = totalArticles;
-    // actualitzem total del carret
+    
     totalPriceEl.textContent = calculateTotal().toFixed(2);
 }
 
-    // seleccionem el modal
+
     const cartModal = document.getElementById("cartModal");
-    // cada vegada que s'obre el modal, cridem printCart()
+   
     cartModal.addEventListener("show.bs.modal", () => {
         printCart();
     });
