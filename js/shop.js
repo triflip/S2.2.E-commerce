@@ -72,41 +72,158 @@ const products = [
 // Improved version of cartList. Cart is an array of products (objects), but each one has a quantity field to define its quantity, so these products are not repeated.
 const cart = [];
 
-const total = 0;
-
-// Exercise 1
 const buy = (id) => {
-    // 1. Loop for to the array products to get the item to add to cart
-    // 2. Add found product to the cart array
-}
+    
+    for(const product of products) {
+        if(product.id === id) {
+
+
+            let found = false;
+            for(const item of cart) {
+                if(item.id === id) {
+                item.quantity++;
+                found = true;
+                break;
+                }
+            }
+
+          
+            if(!found) {
+                const productToAdd =  {...product, quantity: 1}
+                cart.push(productToAdd);
+            }
+            console.log(`${product.name} add to cart!`);
+            console.log(cart);     
+            applyPromotionsCart();
+            console.log(calculateTotal());
+             
+           
+            printCart();
+            }
+    }
+};
+
+const buttons = document.querySelectorAll(".add-to-cart");
+    for(const button of buttons) {
+        button.addEventListener("click", ()=> { 
+            const productId = Number(button.dataset.productId);
+            buy(productId);
+        });   
+    }
 
 // Exercise 2
-const cleanCart = () =>  {
+const cleanCart = () =>  { 
+    cart.length =0;     
+    printCart();
+    console.log("Empty cart");        
+    console.log(cart); 
+}  
+    const cleanCartButtom = document.getElementById("clean-cart"); 
+    cleanCartButtom.addEventListener("click", cleanCart );
 
-}
 
-// Exercise 3
 const calculateTotal = () =>  {
-    // Calculate total price of the cart using the "cartList" array
+    let totalPrice = 0;
+   
+    for(const item of cart) {
+        if(item.subtotalWithDiscount) {
+            totalPrice += item.subtotalWithDiscount;
+        } else { 
+        totalPrice += item.price * item.quantity;
+        }
+    }
+    return totalPrice;
 }
 
-// Exercise 4
+
 const applyPromotionsCart = () =>  {
-    // Apply promotions to each item in the array "cart"
+   for(const item of cart) {
+        if(item.offer && item.quantity >= item.offer.number) {
+
+        
+        if(!item.originalPrice) item.originalPrice = item.price;
+        
+        const discountedPrice = item.originalPrice * (1 - item.offer.percent /100); 
+       
+       
+        item.subtotalWithDiscount = discountedPrice * item.quantity;
+        }else {
+        
+            item.subtotalWithDiscount = item.price * item.quantity
+        }
+    }
+};
+
+
+const printCart = () => {
+   
+    const cartListBody = document.getElementById("cart_list");
+    const totalPriceEl = document.getElementById("total_price");
+    const countProductEl = document.getElementById("count_product");
+
+   
+   cartListBody.innerHTML = "";
+
+   let totalArticles = 0;
+
+   for(const item of cart) {
+    
+    const tr = document.createElement("tr");
+   
+    tr.innerHTML = `
+    <th scope = "row">${item.name}</th>
+    <td>$${item.price.toFixed(2)}</td>
+    <td>${item.quantity}</td>
+    <td>$${item.subtotalWithDiscount ? item.subtotalWithDiscount.toFixed(2) : (item.price * item.quantity).toFixed(2)} </td>
+    <td>
+    <button onclick="removeFromCart(${item.id})">–</button>
+  </td>
+    `;
+
+    cartListBody.appendChild(tr);
+
+    totalArticles += item.quantity;
+}s
+    countProductEl.textContent = totalArticles;
+    
+    totalPriceEl.textContent = calculateTotal().toFixed(2);
 }
 
-// Exercise 5
-const printCart = () => {
-    // Fill the shopping cart modal manipulating the shopping cart dom
-}
+
+    const cartModal = document.getElementById("cartModal");
+   
+    cartModal.addEventListener("show.bs.modal", () => {
+        printCart();
+    });
+
 
 
 // ** Nivell II **
 
 // Exercise 7
-const removeFromCart = (id) => {
+function removeFromCart(id) {
+  // Buscar el producte al carret
+  const productInCart = cart.find(item => item.id === id);
 
+  if (productInCart) {
+    if (productInCart.quantity > 1) {
+      // Si té més d'una unitat, restem una
+      productInCart.quantity--;
+    } else {
+      // Si només en té una, l'eliminem del carret
+      const index = cart.findIndex(item => item.id === id);
+      cart.splice(index, 1);
+    }
+
+    // Actualitzar promocions
+    applyPromotionsCart(cart);
+
+    // Tornar a pintar el carret
+    printCart();
+  }
 }
+window.removeFromCart = removeFromCart;
+
 
 const open_modal = () =>  {
     printCart();
