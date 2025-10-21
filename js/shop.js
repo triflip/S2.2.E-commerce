@@ -120,7 +120,7 @@ const printCart = () => {
     cartListBody.appendChild(tr);
 
     totalArticles += item.quantity;
-}s
+}
     countProductEl.textContent = totalArticles;
     
     totalPriceEl.textContent = calculateTotal().toFixed(2);
@@ -134,28 +134,25 @@ const printCart = () => {
     });
 
 
-
-// ** Nivell II **
-
 // Exercise 7
 function removeFromCart(id) {
-  // Buscar el producte al carret
+  
   const productInCart = cart.find(item => item.id === id);
 
   if (productInCart) {
     if (productInCart.quantity > 1) {
-      // Si té més d'una unitat, restem una
+      
       productInCart.quantity--;
     } else {
-      // Si només en té una, l'eliminem del carret
+      
       const index = cart.findIndex(item => item.id === id);
       cart.splice(index, 1);
     }
 
-    // Actualitzar promocions
+    
     applyPromotionsCart(cart);
 
-    // Tornar a pintar el carret
+    
     printCart();
   }
 }
