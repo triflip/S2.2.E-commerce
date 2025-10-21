@@ -1,5 +1,4 @@
-export 
-const products = [
+export const products = [
     {
         id: 1,
         name: 'cooking oil',
