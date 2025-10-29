@@ -11369,6 +11369,30 @@ body {
   font-size: 1.5rem;
 }
 
+.section-title {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 2rem 0;
+}
+
+.section-title::before,
+.section-title::after {
+  content: "";
+  flex: 1;
+  border-bottom: 1px solid #ccc;
+}
+
+.section-title span {
+  padding: 0.5rem 1rem;
+  border: 2px solid #ccc;
+  border-radius: 999px;
+  margin: 0 1rem;
+  font-weight: bold;
+  background-color: #f9f9f9;
+}
+
+
 .discount-tag {
   position: absolute;
   top: 1rem;
@@ -11406,7 +11430,6 @@ body {
 }
 
 
-/* En desktop: text centrat damunt la imatge */
 @media (min-width: 992px) {
   .hero-banner {
     height: 600px;
