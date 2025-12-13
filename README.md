@@ -68,4 +68,4 @@ You have the following indications from the frontend manager:
 
 ## 🚀  Web 
 
-[![Demo online](https://img.shields.io/badge/Veure%20el%20Lloc%20Web-blue?style=for-the-badge)](https://triflip.github.io/S2.2.E-commerce/)
+[![Demo online](https://img.shields.io/badge/Visit%20-blue?style=for-the-badge)](https://triflip.github.io/S2.2.E-commerce/)
