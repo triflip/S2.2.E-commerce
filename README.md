@@ -66,10 +66,6 @@ You have the following indications from the frontend manager:
 - It is forbidden to copy the code, since this way you don't learn anything. Furthermore, as you can see, the second release of sprint 5 is a mini-level test with the mentor, in which you will have to demonstrate live that you have acquired the javascript concepts. Don't worry, if you work on the releases you won't have any problems.
 
 
-<p align="center">
-  <h2>🔗 Lloc Web del Projecte (GitHub Pages)</h2>
-</p>
+## 🚀  Web 
 
-<iframe src="https://triflip.github.io/S2.2.E-commerce/" width="100%" height="600px">
-  <p>El teu navegador no suporta iframes.</p>
-</iframe>
+[![Demo online](https://img.shields.io/badge/Veure%20el%20Lloc%20Web-blue?style=for-the-badge)](https://triflip.github.io/S2.2.E-commerce/)
